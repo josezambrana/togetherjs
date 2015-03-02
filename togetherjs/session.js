@@ -309,6 +309,10 @@ define(["require", "util", "channels", "jquery", "storage"], function (require, 
           isClient = true;
           shareId = findRoom;
           sessionId = util.generateId();
+        } else if (findRoom && typeof(findRoom.getRoom) == 'function' && typeof(findRoom.getId) == 'function') {
+          isClient = true;
+          shareId = findRoom.getRoom();
+          sessionId = findRoom.getId();
         } else if (findRoom && (! saved) && (! TogetherJS.startup._joinShareId)) {
           assert(findRoom.prefix && typeof findRoom.prefix == "string", "Bad findRoom.prefix", findRoom);
           assert(findRoom.max && typeof findRoom.max == "number" && findRoom.max > 0,
