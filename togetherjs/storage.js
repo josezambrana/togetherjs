@@ -11,7 +11,7 @@ define(["util"], function (util) {
     avatar: null,
     stickyShare: null,
     color: null,
-    seenIntroDialog: false,
+    seenIntroDialog: true,
     seenWalkthrough: false,
     dontShowRtcInfo: false
   };

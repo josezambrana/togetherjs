@@ -148,7 +148,7 @@ Test.resetSettings = function () {
       storage.settings.set("avatar", undefined),
       storage.settings.set("stickyShare", null),
       storage.settings.set("color", "#00ff00"),
-      storage.settings.set("seenIntroDialog", undefined),
+      storage.settings.set("seenIntroDialog", true),
       storage.settings.set("seenWalkthrough", undefined),
       storage.settings.set("dontShowRtcInfo", undefined),
       storage.tab.set("chatlog", undefined)
