@@ -380,12 +380,20 @@ define(["jquery", "ui", "util", "session", "elementFinder", "tinycolor", "eventM
   });
 
   function _onMessage(event) {
-    var namespace = "mousemove:ipython:"
-    if(event.data.indexOf(namespace) == 0) {
-        var data = $.parseJSON(event.data.replace(namespace, ''));
-
+    var namespace = null;
+    
+    if(event.data.indexOf("mousemove:ipython:") == 0) {
+        namespace = "mousemove:ipython:";
         var $iframe = $('#ipython-iframe');
+    }
 
+    if(event.data.indexOf("mousemove:openrefine:") == 0) {
+        namespace = "mousemove:openrefine:";
+        var $iframe = $('#refine-iframe');
+    }
+
+    if (namespace !== null) {
+        var data = $.parseJSON(event.data.replace(namespace, ''));
         data['pageX'] += $iframe.offset().left;
         data['pageY'] += $iframe.offset().top;
         data['target'] = $iframe.get(0);
