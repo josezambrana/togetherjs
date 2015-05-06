@@ -379,12 +379,29 @@ define(["jquery", "ui", "util", "session", "elementFinder", "tinycolor", "eventM
     }
   });
 
+  function _onMessage(event) {
+    var namespace = "mousemove:ipython:"
+    if(event.data.indexOf(namespace) == 0) {
+        var data = $.parseJSON(event.data.replace(namespace, ''));
+
+        var $iframe = $('#ipython-iframe');
+
+        data['pageX'] += $iframe.offset().left;
+        data['pageY'] += $iframe.offset().top;
+        data['target'] = $iframe.get(0);
+
+        mousemove(data);
+    }
+  }
+
   session.on("ui-ready", function () {
     $(document).mousemove(mousemove);
     document.addEventListener("click", documentClick, true);
     document.addEventListener("keydown", documentKeydown, true);
     $(window).scroll(scroll);
     scroll();
+    
+    window.addEventListener("message", _onMessage, false);
   });
 
   session.on("close", function () {
